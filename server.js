@@ -2,9 +2,16 @@ const express = require('express');
 const path = require('path');
 var cors = require('cors');
 const app = express();
-app.use(cors({origin: '*'}));
-
 app.use(express.static("public"));
+
+
+app.get('/products/:id', function (req, res, next) {
+  res.json({msg: 'This is CORS-enabled for all origins!'})
+})
+
+app.listen(80, function () {
+  console.log('CORS-enabled web server listening on port 80')
+})
 
 //app.set('view engine', 'ejs');
 

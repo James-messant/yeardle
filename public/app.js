@@ -11,13 +11,16 @@ var delay = 2000;
 var seeker = random(20, 0);
 var prog = 20;
 
+
+
 function random(max, min) {
   var a = Math.floor(Math.random() * (max - min)) + min;
   return a
 }
 
 async function getData(song) {
-  let url = `https://api.deezer.com/search?q=artist:"kanye_West" track:"${song}"`;
+
+  let url = `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=artist:"kanye_West" track:"${song}"`;
   console.log(url);
   let data = await fetch(url).then(res => res.json());
   return data.data[0];
