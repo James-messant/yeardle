@@ -20,7 +20,7 @@ function random(max, min) {
 
 async function getData(song) {
 
-  let url = `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search?q=artist:"kanye_West" track:"${song}"`;
+  let url = `https://ye-proxy.herokuapp.com/https://api.deezer.com/search?q=artist:"kanye_West" track:"${song}"`;
   console.log(url);
   let data = await fetch(url).then(res => res.json());
   return data.data[0];
@@ -80,6 +80,7 @@ function clickGuess() {
       setTimeout(function () {
         window.location.reload();
       }, 2000);
+      sessionStorage.setItem('streaks', 0);
 
     }
   }
@@ -94,6 +95,13 @@ function clickSkip() {
   $(".progress-bar").css("width", prog + "%").text(sec + "s");
   btn.disabled = false;
   count = count + 1
+  if (count == 5) {
+    setTimeout(function () {
+      window.location.reload();
+    }, 2000);
+    sessionStorage.setItem('streaks', 0);
+
+  }
 
 }
 
