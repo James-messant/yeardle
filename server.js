@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
-
+var cors = require('cors');
 const app = express();
+app.use(cors({origin: '*'}));
 
 app.use(express.static("public"));
 
