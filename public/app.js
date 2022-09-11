@@ -19,7 +19,7 @@ function random(max, min) {
 async function getData(song) {
   let url = `https://api.deezer.com/search?q=artist:"kanye_West" track:"${song}"`;
   console.log(url);
-  let data = await fetch(url).then(res => res.json());
+  let data = await fetch(url, {mode: "no-cors"}).then(res => res.json());
   return data.data[0];
 }
 
