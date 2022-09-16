@@ -2,7 +2,6 @@ document.getElementById("btn").addEventListener("click", clickText);
 document.getElementById("guess").addEventListener("click", clickGuess);
 document.getElementById("skip").addEventListener("click", clickSkip);
 
-
 var streaks = parseInt(sessionStorage.getItem('streaks'), 10) || 0;
 document.getElementById("htmlStreak").innerHTML = "Current Streak: " + streaks;
 var count = 1;
@@ -11,7 +10,27 @@ var delay = 2000;
 var seeker = random(20, 0);
 var prog = 20;
 
+$(".progress-bar").css("width", prog + "%").text("2s");
+var songs = await loadSongs();
+console.log(songs);
+let str = Object.values(songs[random(181, 0)]);
+console.log(str);
 
+let x = await getData(str);
+console.log(x.preview);
+
+
+
+let dropdown = $('#kanye_songs');
+dropdown.empty();
+dropdown.append('<option selected="true" disabled>Choose Song</option>');
+dropdown.prop('selectedIndex', 0);
+const url = 'songs.json';
+$.getJSON(url, function (data) {
+  $.each(data, function (key, entry) {
+    dropdown.append($('<option></option>').attr('value', entry.songs).text(entry.songs));
+  })
+});
 
 function random(max, min) {
   var a = Math.floor(Math.random() * (max - min)) + min;
@@ -104,27 +123,3 @@ function clickSkip() {
   }
 
 }
-
-
-
-$(".progress-bar").css("width", prog + "%").text("2s");
-var songs = await loadSongs();
-console.log(songs);
-let str = Object.values(songs[random(181, 0)]);
-console.log(str);
-
-let x = await getData(str);
-console.log(x.preview);
-
-
-let dropdown = $('#kanye_songs');
-dropdown.empty();
-dropdown.append('<option selected="true" disabled>Choose Song</option>');
-dropdown.prop('selectedIndex', 0);
-const url = 'songs.json';
-$.getJSON(url, function (data) {
-  $.each(data, function (key, entry) {
-    dropdown.append($('<option></option>').attr('value', entry.songs).text(entry.songs));
-  })
-});
-console.log(streaks);
